@@ -3,21 +3,39 @@
 namespace wrossmann\whois;
 
 class IPWhois extends Whois {
+	/**
+	 * 
+	 * @var string ARIN_WHOIS Server used as root for IPWHOIS queries.
+	 */
 	const ARIN_WHOIS = 'whois.arin.net';
 	
+	/**
+	 * Constructor
+	 */
 	public function __construct() {}
 	
+	/**
+	 * Query IPWHOIS info
+	 * {@inheritDoc}
+	 * @see \wrossmann\whois\Whois::query()
+	 */
 	public function query($ipaddr) {
-		$this->validateIP($ipaddr);
+		self::validateIP($ipaddr);
+		// Use ARIN as the starting point
 		$raw_result = $this->queryWhois(self::ARIN_WHOIS, sprintf("%s", $ipaddr));
+		// Re-issue query to other RIR if referred
 		if( preg_match('#^ReferralServer:\s+whois://(.*)$#m', $raw_result, $matches) ) {
-			echo "Referral to {$matches[1]}\n";
 			$raw_result = $this->queryWhois($matches[1], sprintf("%s", $ipaddr));
 		}
 		return $raw_result;
 	}
 	
-	public function validateIP($ipaddr) {
+	/**
+	 * Check that the supplied IP address is a valid public IP
+	 * @param string $ipaddr
+	 * @throws InvalidIPException
+	 */
+	public static function validateIP($ipaddr) {
 		// TODO: check for reserved ranges
 		$nval = inet_pton($ipaddr);
 		if( $nval === false ) {
