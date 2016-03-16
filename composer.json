@@ -1,0 +1,17 @@
+{
+    "name": "wrossmann/whois",
+    "authors": [
+        {
+            "name": "Wade Rossmann",
+            "email": "rossmann.wade@realestatewebmasters.com"
+        }
+    ],
+    "require": {
+    	"php": ">=5.4.0"
+    },
+    "autoload": {
+		"psr-4": {
+			"wrossmann\\whois\\": "src/"
+		}
+	}
+}
