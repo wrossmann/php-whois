@@ -3,9 +3,10 @@
     "authors": [
         {
             "name": "Wade Rossmann",
-            "email": "rossmann.wade@realestatewebmasters.com"
+            "email": "wrossmann@gmail.com"
         }
     ],
+    "license": "MIT",
     "require": {
     	"php": ">=5.4.0"
     },

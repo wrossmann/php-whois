@@ -12,7 +12,9 @@ class IPWhois extends Whois {
 	/**
 	 * Constructor
 	 */
-	public function __construct() {}
+	public function __construct($params=[]) {
+		parent::__construct($params);
+	}
 	
 	/**
 	 * Query IPWHOIS info

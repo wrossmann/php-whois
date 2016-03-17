@@ -13,7 +13,7 @@ class CachedWhois extends Whois {
 	protected $dbh;
 	protected $_stmt_cache = [ ];
 	
-	protected $cache_lifetime = 172800;
+	protected $cache_lifetime = 604800;
 	private $allow_override = [ 'cache_lifetime' ];
 	
 	/**
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS whois (
 	updated INTEGER UNSIGNED
 );
 _E_;
-		return $dbh->query( $query );
+		return $dbh->query( $query ) !== false;
 	}
 	
 	/**
